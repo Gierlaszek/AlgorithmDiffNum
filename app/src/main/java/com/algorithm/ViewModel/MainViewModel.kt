@@ -15,14 +15,16 @@ class MainViewModel : ViewModel() {
 
     //set String replacing a string with numbers it writes into the array
     fun setString(_input : String){
-        try {
-            for (i in _input.split(", ")){
+        for (i in _input.split(", ")) {
+            try {
                 intList.add(i.toInt())
+            } catch (e: NumberFormatException) {
+                println("Wrong format type. Try again by separating the numbers , and a space")
+            } catch (e: NullPointerException) {
+                println("Wrong type")
             }
-        }catch (e : NumberFormatException ){
-            println("Wrong format type. Try again by separating the numbers , and a space")
         }
+        data.postValue(determine.determineNumber(intList)?.let { DataModel(it) })
 
-        data.value = DataModel(determine.determineNumber(intList))
     }
 }

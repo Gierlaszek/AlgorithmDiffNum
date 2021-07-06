@@ -32,7 +32,12 @@ class SecondFragment : Fragment() {
 
         //observe life cycle data, set determine number to textView
         viewModel.data.observe(viewLifecycleOwner, Observer {
-            textView.text = it.number.toString()
+            try{
+                textView.text = it.number.toString()
+            }catch(e : NullPointerException){
+                textView.textSize = 14F
+                textView.text = ("There is no single even or odd number in the given set: \n" + viewModel.intList.toString())
+            }
         })
 
     }
