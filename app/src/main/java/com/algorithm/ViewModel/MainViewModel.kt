@@ -15,6 +15,7 @@ class MainViewModel : ViewModel() {
 
     //set String replacing a string with numbers it writes into the array
     fun setString(_input : String){
+        intList.clear()
         for (i in _input.split(", ")) {
             try {
                 intList.add(i.toInt())
